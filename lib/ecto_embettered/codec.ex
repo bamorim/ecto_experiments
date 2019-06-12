@@ -1,7 +1,10 @@
 defmodule EctoEmbettered.Codec do
-  @type encoded_map ::
-          %{required(String.t()) => encoded_map()}
-          | [encoded_map()]
+  @type encoded_map :: %{required(String.t()) => encoded()}
+  @type encoded_list :: [encoded()]
+
+  @type encoded ::
+          encoded_map()
+          | encoded_list()
           | String.t()
           | number()
           | boolean()
@@ -16,7 +19,7 @@ defmodule EctoEmbettered.Codec do
     end
   end
 
-  @spec decode(type :: any(), encoded_map()) :: {:ok, any()} | :error
+  @spec decode(schema :: atom(), encoded_map()) :: {:ok, any()} | :error
   def decode(schema, value) do
     type = {:embed, Ecto.Embedded.struct(__MODULE__, :field, cardinality: :one, related: schema)}
     load_embed(type, value)
