@@ -28,3 +28,14 @@ use Mix.Config
 # here (which is why it is important to import them last).
 #
 #     import_config "#{Mix.env()}.exs"
+
+if Mix.env() == :test do
+  config :ecto_experiments, EctoEmbettered.TestRepo,
+    database: "ecto_experiments_test",
+    username: "postgres",
+    password: "postgres",
+    hostname: "localhost",
+    pool: Ecto.Adapters.SQL.Sandbox
+
+  config :ecto_experiments, ecto_repos: [EctoEmbettered.TestRepo]
+end
