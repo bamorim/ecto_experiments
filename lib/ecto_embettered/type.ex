@@ -1,4 +1,4 @@
-defmodule MapCodecEcto.EmbeddedType do
+defmodule EctoEmbettered.Type do
   defmacro __using__(schema: schema) do
     quote do
       @behaviour Ecto.Type
@@ -8,11 +8,11 @@ defmodule MapCodecEcto.EmbeddedType do
       def cast(_), do: :error
 
       def load(data) do
-        MapCodecEcto.EmbeddedSchemaCodec.decode(unquote(schema), data)
+        EctoEmbettered.Codec.decode(unquote(schema), data)
       end
 
       def dump(%unquote(schema){} = value) do
-        MapCodecEcto.EmbeddedSchemaCodec.encode(value)
+        EctoEmbettered.Codec.encode(value)
       end
 
       def dump(_), do: :error

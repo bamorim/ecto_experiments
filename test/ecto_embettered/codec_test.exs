@@ -1,7 +1,7 @@
-defmodule MapCodecEcto.EmbeddedSchemaCodecTest do
+defmodule EctoEmbettered.CodecTest do
   use ExUnit.Case
 
-  alias MapCodecEcto.EmbeddedSchemaCodec
+  alias EctoEmbettered.Codec
 
   defmodule NestedSchema do
     use Ecto.Schema
@@ -49,13 +49,13 @@ defmodule MapCodecEcto.EmbeddedSchemaCodecTest do
 
   describe "encode/1" do
     test "encodes into a JSON-like map", ctx do
-      assert {:ok, ctx.encoded} == EmbeddedSchemaCodec.encode(ctx.schema)
+      assert {:ok, ctx.encoded} == Codec.encode(ctx.schema)
     end
   end
 
   describe "decode/2" do
     test "decodes back to the schema struct", ctx do
-      assert {:ok, ctx.schema} == EmbeddedSchemaCodec.decode(EmbeddedSchema, ctx.encoded)
+      assert {:ok, ctx.schema} == Codec.decode(EmbeddedSchema, ctx.encoded)
     end
   end
 end

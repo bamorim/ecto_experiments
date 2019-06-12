@@ -1,4 +1,4 @@
-defmodule MapCodecEcto.EmbeddedSchemaPolymorphicTypeTest do
+defmodule EctoEmbettered.PolymorphicTypeTest do
   use ExUnit.Case
 
   defmodule Schema1 do
@@ -20,7 +20,7 @@ defmodule MapCodecEcto.EmbeddedSchemaPolymorphicTypeTest do
   end
 
   defmodule MyType do
-    use MapCodecEcto.PolymorphicType,
+    use EctoEmbettered.PolymorphicType,
       s1: Schema1,
       s2: Schema2
   end
@@ -39,7 +39,7 @@ defmodule MapCodecEcto.EmbeddedSchemaPolymorphicTypeTest do
 
     test "saves the value as the encoded value" do
       assert {:ok, %{"data" => encoded}} = MyType.dump(%Schema1{x: "x"})
-      assert {:ok, encoded} == MapCodecEcto.EmbeddedSchemaCodec.encode(%Schema1{x: "x"})
+      assert {:ok, encoded} == EctoEmbettered.Codec.encode(%Schema1{x: "x"})
     end
   end
 

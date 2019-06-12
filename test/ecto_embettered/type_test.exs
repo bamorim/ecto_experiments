@@ -1,4 +1,4 @@
-defmodule MapCodecEcto.EmbeddedTypeTest do
+defmodule EctoEmbettered.TypeTest do
   use ExUnit.Case
 
   defmodule Schema do
@@ -20,7 +20,7 @@ defmodule MapCodecEcto.EmbeddedTypeTest do
   end
 
   defmodule MyType do
-    use MapCodecEcto.EmbeddedType, schema: Schema
+    use EctoEmbettered.Type, schema: Schema
   end
 
   describe "generated type/0" do
@@ -31,7 +31,7 @@ defmodule MapCodecEcto.EmbeddedTypeTest do
 
   describe "generated dump/1" do
     test "saves the value as the encoded value" do
-      assert MapCodecEcto.EmbeddedSchemaCodec.encode(%Schema{x: "x"}) ==
+      assert EctoEmbettered.Codec.encode(%Schema{x: "x"}) ==
                MyType.dump(%Schema{x: "x"})
     end
 

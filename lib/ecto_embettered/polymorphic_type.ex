@@ -1,4 +1,4 @@
-defmodule MapCodecEcto.PolymorphicType do
+defmodule EctoEmbettered.PolymorphicType do
   defmacro __using__(schemas_by_name) do
     schemas = schemas_by_name |> Keyword.values()
 
@@ -6,7 +6,7 @@ defmodule MapCodecEcto.PolymorphicType do
       Enum.map(schemas_by_name, fn {name, schema} ->
         quote do
           def load(%{"type" => unquote(to_string(name)), "data" => data}) do
-            MapCodecEcto.EmbeddedSchemaCodec.decode(unquote(schema), data)
+            EctoEmbettered.Codec.decode(unquote(schema), data)
           end
         end
       end)
@@ -15,7 +15,7 @@ defmodule MapCodecEcto.PolymorphicType do
       Enum.map(schemas_by_name, fn {name, schema} ->
         quote do
           def dump(%unquote(schema){} = value) do
-            with {:ok, dumped} <- MapCodecEcto.EmbeddedSchemaCodec.encode(value) do
+            with {:ok, dumped} <- EctoEmbettered.Codec.encode(value) do
               {:ok, %{"type" => unquote(to_string(name)), "data" => dumped}}
             end
           end
