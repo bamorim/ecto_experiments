@@ -1,4 +1,10 @@
 defmodule EctoEmbettered.PolymorphicType do
+  @moduledoc """
+  Creates a new `Ecto.Type` that is saved as a tagged union type where possible types are embedded
+  schemas. Sicne all possible types are embedded_schemas, in runtime they are structs. And since
+  structs are already "tagged" in runtime, the loaded value of this type is the struct itself.
+  """
+
   defmacro __using__(schemas_by_name) do
     schemas = schemas_by_name |> Keyword.values()
 
