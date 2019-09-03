@@ -1,6 +1,6 @@
 # EctoExperiments
 
-A repository where I can play around with Ecto before exporting things into their own libraries
+A repository where I can play around with Ecto before exporting things into their own libraries.
 
 ## EctoEmbettered
 
